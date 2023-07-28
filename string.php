@@ -79,7 +79,7 @@ echo $unit->format('%I'), "\n";
 
 $base = mktime(0,0,0,1,1,2023);
 
-foreach (['0231','020031', '2-31', '02-31','2-031'] as $dt){
+foreach (['0231','020031', '2-31', '02-31','2/31'] as $dt){
     $x =  mkdate($dt);
     printf("mkdate('%s') =\t '%s' \n\n",  $dt, $x);
 }
@@ -98,13 +98,16 @@ mkdate('2-31') =	 '03-03'
 mkdate('02-31') =	 '03-03' 
 
 2, 31
-mkdate('2-031') =	 '03-03' 
+mkdate('2/31') =	 '03-03' 
 */
 function mkdate ($date, $days = 0)
 {
     $year = 2023;
     if (preg_match('/^[0-9]+-[0-9]+$/', $date)){
         list ($m, $d) = explode('-', $date);
+    }
+    if (preg_match('/^[0-9]+\/[0-9]+$/', $date)){
+        list ($m, $d) = explode('/', $date);
     }elseif (preg_match('/^[0-9]{4,}$/', $date)){
         $m = substr($date, 0, 2);
         $d = substr($date, 2);
