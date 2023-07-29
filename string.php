@@ -5,9 +5,10 @@ header('Content-Type: text/plain; charset=UTF-8');
 $str = "１２Ⅾ　D　Ⅾ08";
 echo "'{$str}'\n";
 if ($sid){
-    echo $sid, ", ", KsuStudent::getDept($sid), "\n";
-    echo $sid, ", ", KsuStudent::getDept($sid, 'FALT'), "\n";
-    echo $sid, ", ", KsuStudent::getDept($sid, 'DEPT'), "\n";
+    echo $sid, "\n";
+    echo KsuStudent::getDept($sid), "\n";
+    echo KsuStudent::getDept($sid, 'FALT'), "\n";
+    echo KsuStudent::getDept($sid, 'DEPT'), "\n";
 }else{
     echo "Unrecognized student id '{$str}'\n";
 }
@@ -17,9 +18,10 @@ $str = "１２as １　　０ ２　 　";
 echo "'{$str}'\n";
 $sid =  KsuStudent::validateSid($str);
 if ($sid){
-    echo $sid, ", ", KsuStudent::getDept($sid), "\n";
-    echo $sid, ", ", KsuStudent::getDept($sid, 'FALT'), "\n";
-    echo $sid, ", ", KsuStudent::getDept($sid, 'DEPT'), "\n";
+    echo $sid, "\n";
+    echo KsuStudent::getDept($sid), "\n";
+    echo KsuStudent::getDept($sid, 'FALT'), "\n";
+    echo KsuStudent::getDept($sid, 'DEPT'), "\n";
 }
 echo "\n";
 
@@ -29,9 +31,10 @@ $str = "2２GJK   ０　 ３　 　";
 echo "'{$str}'\n";
 $sid =   KsuStudent::validateSid($str);
 if ($sid){
-    echo $sid, ", ", KsuStudent::getDept($sid), "\n";
-    echo $sid, ", ", KsuStudent::getDept($sid, 'FALT'), "\n";
-    echo $sid, ", ", KsuStudent::getDept($sid, 'DEPT'), "\n";
+    echo $sid, "\n";
+    echo KsuStudent::getDept($sid), "\n";
+    echo KsuStudent::getDept($sid, 'FALT'), "\n";
+    echo KsuStudent::getDept($sid, 'DEPT'), "\n";
 }
 echo "\n";
 // OUTPUT: 22GJK03
@@ -40,9 +43,10 @@ $str = "１２DTI　 　　０　 ２　　 ";
 echo "'{$str}'\n";
 $sid = KsuStudent::validateSid($str);
 if ($sid){
-    echo $sid, ", ", KsuStudent::getDept($sid), "\n";
-    echo $sid, ", ", KsuStudent::getDept($sid, 'FALT'), "\n";
-    echo $sid, ", ", KsuStudent::getDept($sid, 'DEPT'), "\n";
+    echo $sid, "\n";
+    echo KsuStudent::getDept($sid), "\n";
+    echo KsuStudent::getDept($sid, 'FALT'), "\n";
+    echo KsuStudent::getDept($sid, 'DEPT'), "\n";
 }
 // OUTPUT: 
 
