@@ -2,14 +2,19 @@
 
 header('Content-Type: text/plain; charset=UTF-8');
 
-$str = "１２Ⅾ　D　Ⅾ";
-$str = preg_replace("/( |　)/", "", trim($str) );
-$str = preg_replace("/Ⅾ/", "D", $str );
-$str = mb_convert_kana($str, "a");
-echo $str, "\n\n";
-
+$str = "１２Ⅾ　D　Ⅾ08";
+echo "'{$str}'\n";
+if ($sid){
+    echo $sid, ", ", KsuStudent::getDept($sid), "\n";
+    echo $sid, ", ", KsuStudent::getDept($sid, 'FALT'), "\n";
+    echo $sid, ", ", KsuStudent::getDept($sid, 'DEPT'), "\n";
+}else{
+    echo "Unrecognized student id '{$str}'\n";
+}
+echo "\n";
 
 $str = "１２as １　　０ ２　 　";
+echo "'{$str}'\n";
 $sid =  KsuStudent::validateSid($str);
 if ($sid){
     echo $sid, ", ", KsuStudent::getDept($sid), "\n";
@@ -21,6 +26,7 @@ echo "\n";
 // OUTPUT: 12RS102
 
 $str = "2２GJK   ０　 ３　 　";
+echo "'{$str}'\n";
 $sid =   KsuStudent::validateSid($str);
 if ($sid){
     echo $sid, ", ", KsuStudent::getDept($sid), "\n";
@@ -31,6 +37,7 @@ echo "\n";
 // OUTPUT: 22GJK03
 
 $str = "１２DTI　 　　０　 ２　　 ";
+echo "'{$str}'\n";
 $sid = KsuStudent::validateSid($str);
 if ($sid){
     echo $sid, ", ", KsuStudent::getDept($sid), "\n";
@@ -101,13 +108,13 @@ class KsuStudent{
                 $dept = self::GRADUATE_SCHL[$dept_id];
             }
         }
+        if (!$dept) return null;
+        list ($flt_name, $dpt_name) = explode(' ', $dept);
         if ($part == 'DEPT'){
-            list ($_, $dept) = explode(' ', $dept);
-            return $dept;
+            return $dpt_name;
         }
         if ($part == 'FALT'){
-            list ($dept, $_) = explode(' ', $dept);
-            return $dept;
+            return $flt_name;
         }
         if ($part == 'FULL'){
             return $dept;
@@ -122,7 +129,7 @@ class KsuStudent{
         $str = preg_replace("/Ⅾ/", "D", $str );//全角と認識できない文字を変換
         $str = mb_convert_kana($str, "a");//全角英数を半角英数へ変換
         $str = strtoupper($str);//小文字を大文字に変換
-        // echo "** ",  $str, " **\n";
+    
         $pattern = implode('|',array_keys(self::FACULTY_DEPT));//学部IDのパターン
         if (preg_match('/^\d{2}('. $pattern . ')\d{3}$/', $str)){
             return $str;
