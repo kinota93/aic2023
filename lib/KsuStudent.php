@@ -7,13 +7,12 @@ use kst\KsuCode;
 class KsuStudent{
 
     public static function getInfo($sid){
-        // $part: 'FULL', 'DFALT', 'DEPT'
         $sid = self::validateSid($sid);
         if (!$sid) return null;//正しい学生番号ではない
         if (preg_match('/^\d{2}[A-Z]{2}\d{3}$/', $sid)){
             $stud_yr = substr($sid, 0, 2);
             $dept_id = substr($sid, 2, 2);
-            $stud_no = substr($sid, 4, 3);
+            $stud_no = substr($sid, -3);
             if (in_array($dept_id, array_keys(KsuCode::FACULTY_DEPT))){
                 $dept = KsuCode::FACULTY_DEPT[$dept_id];
             }
@@ -21,12 +20,12 @@ class KsuStudent{
         if (preg_match('/^\d{2}[A-Z]{3}\d{2}$/', $sid)){
             $stud_yr = substr($sid, 0, 2);
             $dept_id = substr($sid, 2, 3);
-            $stud_no = substr($sid, 5, 2);
+            $stud_no = substr($sid, -2);
             if (in_array($dept_id, array_keys(KsuCode::GRADUATE_SCHL))){
                 $dept = KsuCode::GRADUATE_SCHL[$dept_id];
             }
         }
-        $rs = [];
+        
         if (isset($sid, $stud_yr, $dept_id, $stud_no, $dept)){
             list ($faculty_name, $dept_name) = explode(' ', $dept);
             return [$sid, $stud_yr, $dept_id, $stud_no, $faculty_name, $dept_name];
