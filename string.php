@@ -6,11 +6,11 @@ header('Content-Type: text/plain; charset=UTF-8');
 
 $str = "１２Ⅾ　D　Ⅾ08";
 echo "'{$str}'\n";
-$student = KsuStudent::getInfo($str);
-if ($student){
-    echo '[', implode(', ', $student), "]\n";
+$st_info = KsuStudent::parseSid($str);
+if ($st_info){
+    echo '[', implode(', ', $st_info), "]";
 }else{
-    echo "Unrecognized string of student id '{$str}'\n";
+    echo "Unrecognized string of student id '{$str}'";
 }
 echo "\n";
 // '１２Ⅾ　D　Ⅾ08'
@@ -18,11 +18,11 @@ echo "\n";
 
 $str = "２４as １　　０ ２　 　";
 echo "'{$str}'\n";
-$student = KsuStudent::getInfo($str);
-if ($student){
-    echo '[', implode(', ', $student), "]\n";
+$st_info = KsuStudent::parseSid($str);
+if ($st_info){
+    echo '[', implode(', ', $st_info), "]";
 }else{
-    echo "Unrecognized string '{$str}'\n";
+    echo "Unrecognized string '{$str}'";
 }
 echo "\n";
 // '２４as １　　０ ２　 　'
@@ -30,11 +30,11 @@ echo "\n";
 
 $str = "2２GJK   ０　 ３　 　";
 echo "'{$str}'\n";
-$student = KsuStudent::getInfo($str);
-if ($student){
-    echo '[', implode(', ', $student), "]\n";
+$st_info = KsuStudent::parseSid($str);
+if ($st_info){
+    echo '[', implode(', ', $st_info), "]";
 }else{
-    echo "Unrecognized string '{$str}'\n";
+    echo "Unrecognized string '{$str}'";
 }
 echo "\n";
 // '2２GJK   ０　 ３　 　'
@@ -42,11 +42,11 @@ echo "\n";
 
 $str = "１２DTI　 　　０　 ２　　 ";
 echo "'{$str}'\n";
-$student = KsuStudent::getInfo($str);
-if ($student){
-    echo '[', implode(', ', $student), "]\n";
+$st_info = KsuStudent::parseSid($str);
+if ($st_info){
+    echo '[', implode(', ', $st_info), "]";
 }else{
-    echo "Unrecognized string '{$str}'\n";
+    echo "Unrecognized string '{$str}'";
 }
 echo "\n";
 // '１２DTI　 　　０　 ２　　 '

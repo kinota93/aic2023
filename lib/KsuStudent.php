@@ -6,8 +6,8 @@ use kst\KsuCode;
 
 class KsuStudent{
 
-    public static function getInfo($sid){
-        $sid = self::validateSid($sid);
+    public static function parseSid($str){
+        $sid = self::validateSid($str);
         if (!$sid) return null;//正しい学生番号ではない
         if (preg_match('/^\d{2}[A-Z]{2}\d{3}$/', $sid)){
             $stud_yr = substr($sid, 0, 2);
@@ -25,7 +25,6 @@ class KsuStudent{
                 $dept = KsuCode::GRADUATE_SCHL[$dept_id];
             }
         }
-        
         if (isset($sid, $stud_yr, $dept_id, $stud_no, $dept)){
             list ($faculty_name, $dept_name) = explode(' ', $dept);
             return [$sid, $stud_yr, $dept_id, $stud_no, $faculty_name, $dept_name];
@@ -38,8 +37,8 @@ class KsuStudent{
     public static function validateSid($str)
     {
         $str = preg_replace("/( |　)/", "", trim($str) );//空白文字を削除
-        if (!preg_match("/^[a-zA-Z0-9ａ-ｚA-Z０-９]+$/", $str)){
-            return null;
+        if (!preg_match("/^[a-zA-Z0-9ａ-ｚA-Z０-９]+$/", $str)){ 
+            return null;// 英数以外の文字が含まれるなら，無効
         }
         $str = mb_convert_kana($str, "a");//全角英数を半角英数へ変換
         $str = strtoupper($str);//小文字を大文字に変換
