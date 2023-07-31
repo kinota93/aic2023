@@ -1,3 +1,9 @@
+# form validation
+- html5 validation
+- jquery.validate.js
+- parsley.js
+- bootstrap validation
+
 # html5 validation, form elements
 ## input type
  `["color", "date", "datetime-local","email","month","number","range","url","week"]`
