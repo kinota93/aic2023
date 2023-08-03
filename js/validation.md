@@ -69,8 +69,8 @@ Parsley comes with many builtin validators and provides tools to specify your ow
 .parsley().addValidator(
   'name', 
   {
-    validate[Number|String] : function(){...return bool value;},
-    requirementType: 'integer' | 'string',
+    validate[Number|String|Date|Multiple]: function(){...return bool value;},
+    requirementType: 'integer'|'number'|'string'|'date'|'regexp'|'boolean'|['integer','integer'] #range,
     messages: {en: 'English message', ja: '日本語メッセージ'},
   });
 ```
